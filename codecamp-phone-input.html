@@ -1,0 +1,30 @@
+﻿<polymer-element name="codecamp-phone-input" extends="input" attributes="value name" on-keypress="{{inputKeypress}}" on-keyup="{{inputKeyup}}">
+    <template>
+        <style>
+            :host {
+                border: 0;
+                padding: 0;
+            }
+        </style>
+        <input type="text" id="internalInput" name="{{name}}" value="{{value}}" maxlength="14" placeholder="(XXX) XXX-XXXX" />
+    </template>
+    <script>
+        Polymer("codecamp-phone-input", {
+            formatPhone: function (phone) {
+                phone = phone.replace(/[^0-9]/g, "");
+                if (phone == "")
+                    return "";
+                phone = phone.replace(/(\d{0,3})(\d{0,3})(\d{0,4})/, "($1) $2-$3");
+                return phone;
+            },
+            inputKeypress: function (event, detail, sender) {
+                var keyCode = (event.charCode || event.keyCode);
+                if (keyCode < 48 || keyCode > 57)
+                    event.preventDefault();
+            },
+            inputKeyup: function (event, detail, sender) {
+                this.$.internalInput.value = this.formatPhone(this.value);
+            }
+        });
+    </script>
+</polymer-element>

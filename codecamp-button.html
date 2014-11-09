@@ -1,0 +1,26 @@
+﻿<polymer-element name="codecamp-button" attributes="myattribute">
+    <template>
+        <style>
+            div {
+                display: inline-block;
+                border-radius: 8px;
+                padding: 10px 15px;
+                margin: 5px;
+                background-color: #999;
+                cursor: pointer;
+                font-family: sans-serif;
+            }
+        </style>
+        <div on-click="{{buttonClick}}">
+            <content></content> {{myattribute}}
+        </div>
+    </template>
+    <script>
+        Polymer("codecamp-button", {
+            buttonClick: function (event, detail, sender) {
+                alert("Button clicked!");
+            }
+        });
+    </script>
+
+</polymer-element>
